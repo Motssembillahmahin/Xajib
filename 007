@@ -1,0 +1,242 @@
+###lab_1---comment
+sex<-c("Male","Female","Male","Male","Female","Female","Male","Male","Female","Male","Female","Male","Male","Female","Male","Male","Female","Male","Female","Male")
+religion<-c("Muslim","Hindu","Muslim","Hindu","Muslim","Christian","Muslim","Hindu","Muslim","Others","Hindu","Christian","Others","Muslim","Hindu","Christian","Muslim","Others","Muslim","Others")
+edu<-c("BTech","BEng","MSc","BSc","Hons","Primary","Primary","Primary","HSC","HSC","HSC","HSC","SSC","SSC","SSC","SSC","SSC","SSC","SSC","SSC")
+blood<-c("A+","AB+","A+","A+","AB-","AB-","B+","B+","B+","AB+","AB-","AB-","B+","AB+","O+","O+","O+","AB-","AB+","AB-")
+
+ 
+
+sexF<-table(sex)
+religionF<-table(religion)
+eduF<-table(edu)
+bloodF<-table(blood)
+
+ 
+
+SF<-data.frame(sexF)
+RF<-data.frame(religionF)
+EF<-data.frame(eduF)
+BF<-data.frame(bloodF)
+
+ 
+
+pie(sexF,main = "Pie chart for Sex",col = c("green","red"))
+pie(religionF, main = "Pie chart for religions",col = c("red","green","yellow"))
+
+ 
+
+barplot(eduF,main = "Father's level of Education", xlab = "Degree",ylab = "Number of Parents",col = c("red","green","yellow","black","gray","green","red","yellow"))
+barplot(bloodF,main = "Blood Distribution of Students",xlab = "Blood Groups",ylab = "Number of Students", col = c("red","green","yellow","black"))
+
+###lab_2 comment
+# Raw data
+scores <- c(77, 44, 49, 33, 38, 33, 76, 55, 68, 39, 44, 59, 36, 55, 47, 61, 53, 32, 65, 51, 29, 41, 32, 45, 83, 58, 73, 47, 40, 26, 
+59, 43, 66, 44, 41, 25, 39, 72, 37, 55, 34, 47, 66, 53, 55, 58, 49, 45, 61, 41, 55, 92, 83, 77, 45, 62, 45, 36, 78, 48, 54, 50, 51, 
+66, 80, 73, 57, 61, 56, 50, 45, 82, 71, 48, 46, 69, 38, 72, 56, 64)
+length(scores)
+# I. Mean, Median, Mode, Variance, and Standard Deviation
+mean_scores <- mean(scores)
+mean_scores
+
+median_scores <- median(scores)
+median_scores
+
+freq=table(scores)
+freq
+mode_scores <- as.numeric(freq[freq==max(freq)])
+mode_scores
+var_scores <- var(scores)
+var_scores
+sd_scores <- sd(scores)
+sd_scores
+# II. Five-number summary
+summary_scores<-summary(scores)
+ summary_scores
+# III. Frequency Distribution
+class_interval <- 10 
+# Choose an appropriate class interval, you can modify it if needed
+freq_table <- table(cut(scores, breaks = seq(20,100, by = 10)))
+freq_table
+
+# Calculate cumulative frequencies
+
+
+# IV. Histogram and Ogive
+h<-hist( scores, breaks = seq(20,100, by = 10))
+f=h$counts
+cum<-cumsum(f)
+cumulative_freq_less<-c(0)
+cumulative_freq_less<-c(cumulative_freq_less,cum)
+cumulative_freq_more<-rev(cum)
+cumulative_freq_more<-c(cumulative_freq_more,0)
+breaks_custom = seq(20,100, by = 10)
+length(breaks_custom)
+length(cumulative_freq_more)
+length(cumulative_freq_less)
+cumulative_freq_less
+freq_table
+
+plot(breaks_custom,cumulative_freq_less, type = "o")
+lines(breaks_custom,cumulative_freq_more, type = "o")
+#VI. Stem-and-leaf plot
+
+stem<-stem(scores
+###lab_3
+ages <- c(89, 89, 87, 86, 85, 83, 83, 82, 81, 80, 78, 78, 77, 76, 73, 73, 73, 72, 69, 69, 68, 67, 66, 66, 65, 65, 
+64, 63, 61, 61, 60, 59, 58, 57, 56, 54, 54, 53, 53, 51, 51, 49, 47, 46, 44, 43, 42, 51, 36, 2000)
+# Calculating mean
+mean_age <- mean(ages)
+mean_age
+# Calculating median
+median_age <- median(ages)
+median_age
+# Calculating mode
+mode_age <- as.numeric(names(table(ages))[table(ages) == max(table(ages))])
+mode_age
+#The measure of central tendency that best describes a typical entry in this dataset would be the median(66), as it is less affected by the extreme value (2000) compared to the mean (104.9388).
+#Solve:iii
+ages[ages == 2000] <- 35
+# Calculating mean
+mean_age_2 <- mean(ages)
+mean_age_2
+# Calculating median
+median_age_2 <- median(ages)
+median_age_2
+
+# Calculating mode
+mode_age_2 <- as.numeric(names(table(ages))[table(ages) == max(table(ages))])
+mode_age_2
+
+#Solve:iv
+# Sorted ages
+sorted_ages <- sort(ages)
+sorted_ages
+# Trimming 2% from both ends
+trim_pct <- 0.02
+trim_pct
+trim_length <- round(length(sorted_ages) * trim_pct)
+trim_length 
+trimmed_mean_age <- mean(sorted_ages[(trim_length + 1):(length(sorted_ages) - trim_length)])
+trimmed_mean_age
+#Solve:v
+# Frequency table
+freq_table_age <- table(ages)
+freq_table_age
+# Creating relative frequency table
+rel_freq_table_age <- prop.table(freq_table_age)
+rel_freq_table_age
+#Solve:vi
+# Creating histogram
+hist(ages, breaks = 10, freq = FALSE, main = "Relative Frequency Histogram of Ages",
+ ylim = c(0, 0.25), xlab = "Age", ylab = "Relative Frequency")
+# Adding relative frequencies as bars
+rel_freq_table_age <- prop.table(freq_table_age)
+barplot(rel_freq_table_age, horiz = TRUE, col = "lightblue", border = "white", las = 1, xlim = c(0, 0.25))
+# Solve: Vii
+# Calculating skewness
+skewness_age <- skewness(ages)
+skewness_age
+# Calculating kurtosis
+kurtosis_age <- kurtosis(ages)
+# Solve: Viii
+# Calculating standard deviation
+sd_age <- sd(ages)
+sd_age
+# Calculating mean deviation about median
+mean_dev_median <- median(abs(ages - median(ages)))
+mean_dev_median
+# Calculating coefficient of variation
+cv_age <- sd_age / mean_age
+cv_age
+##lab_4
+# Define the GPA data for each student
+student_A <- c(2.5, 2.5, 3.0, 3.5, 3.5, 4.0, 3.5, 3.5)
+student_B <- c(2.5, 3.0, 4.0, 4.0, 4.0, 2.0, 2.5, 4.0)
+# Calculate the average GPAs for each student
+avg_GPA_A <- mean(student_A)
+avg_GPA_A
+avg_GPA_B <- mean(student_B)
+avg_GPA_B
+avg2_GPA_A <- median(student_A)
+avg2_GPA_A
+avg2_GPA_B <- median(student_B)
+avg2_GPA_B
+avg_GPA_A <- mean(student_A)
+avg_GPA_A
+avg_GPA_B <- mean(student_B)
+avg_GPA_B
+mode_avg_GPA_A <- as.numeric(names(table(student_A))[table(student_A)==max(table(student_A))])
+mode_avg_GPA_A 
+mode_avg_GPA_B <- as.numeric(names(table(student_B))[table(student_B)==max(table(student_B))])
+mode_avg_GPA_B 
+
+var_avg_GPA_A <- var(student_A)
+var_avg_GPA_A
+var_avg_GPA_B = var(student_B)
+var_avg_GPA_B
+
+
+sd_avg_GPA_A <- sd(student_A)
+sd_avg_GPA_A
+sd_avg_GPA_B =sd(student_B)
+sd_avg_GPA_B
+##lab_5 comment
+# Set the seed for reproducibility
+set.seed(1234)
+# Generate a random sample from the binomial distribution
+sample_size <- 1000
+sample_size
+n <- 5
+n
+p <- 0.3
+p
+random_sample <- rbinom(sample_size, n, p)
+random_sample
+# Calculate the observed frequencies in the sample
+observed_freq <- table(random_sample)
+observed_freq
+# Calculate the probabilities in the true binomial distribution
+binom_probs <- dbinom(0:n, n, p)
+binom_probs
+# Create a data frame to store the observed and expected frequencies
+comparison <- data.frame(Observed = observed_freq, Expected = binom_probs)
+
+# Print the comparison
+print(comparison)
+
+##lab_6
+#Number I
+# Generate Z values from -4.0 to 4.0
+z_values <- seq(-4.0, 4.0, by = 0.1)
+# Calculate PDF of Z
+pdf_z <- dnorm(z_values, mean = 0, sd = 1)
+# Plot standard normal curve
+plot(z_values, pdf_z, type = "l", xlab = "Z", ylab = "PDF", main = "Standard Normal Distribution")
+#Number II
+# Define the parameters
+mean_X <- 1000
+variance_X <- 250000
+sd_X <- sqrt(variance_X)
+# Generate X values
+x_values <- seq(-5000, 3000, by = 100)
+# Calculate PDF of X
+pdf_X <- dnorm(x_values, mean = mean_X, sd = sd_X)
+# Calculate CDF of X
+cdf_X <- pnorm(x_values, mean = mean_X, sd = sd_X)
+# Plot normal density curve
+plot(x_values, pdf_X, type = "l", xlab = "X", ylab = "PDF", main = "Normal Distribution: X ~ N(1000, 
+250000)")
+# Plot normal cumulative distribution curve
+plot(x_values, cdf_X, type = "l", xlab = "X", ylab = "CDF", main = "Normal Distribution: X ~ N(1000, 
+250000)")
+#Number III
+# Find P(X = 850)
+prob_X_850 <- pnorm(850, mean = mean_X, sd = sd_X, lower.tail = TRUE)
+print(prob_X_850)
+# Find P(X > 1200)
+prob_X_gt_1200 <- 1 - pnorm(1200, mean = mean_X, sd = sd_X, lower.tail = TRUE)
+print(prob_X_gt_1200)
+# Find P(1000 < X < 2000)
+prob_X_between <- pnorm(2000, mean = mean_X, sd = sd_X, lower.tail = TRUE) - pnorm(1000, mean = 
+mean_X, sd = sd_X, lower.tail = TRUE)
+print(prob_X_between
