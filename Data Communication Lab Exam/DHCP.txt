@@ -1,0 +1,92 @@
+command for dhcp :-
+step 1 - dhcp excluded-address
+step 2 - dhcp pool
+
+command for router 3-
+Router>en
+Router#configure terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip dhcp excluded-address 192.168.8.1
+Router(config)#ip dhcp excluded-address 192.168.9.1
+Router(config)#ip dhcp excluded-address 192.168.10.1
+Router(config)#ip dhcp pool netA
+Router(dhcp-config)#network 192.168.8.0 255.255.255.0
+Router(dhcp-config)#default-route 192.168.8.1
+Router(dhcp-config)#ex
+Router(config)#int f1/0
+Router(config-if)#ip add 192.168.8.1 255.255.255.0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet1/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet1/0, changed state to up
+
+Router(config-if)#ex
+Router(config)#ip dhcp pool netB 
+Router(dhcp-config)#network 192.168.9.0 255.255.255.0
+Router(dhcp-config)#default-route 192.168.9.1
+Router(dhcp-config)#ex
+Router(config)#int f0/1
+Router(config-if)#ip add 192.168.9.1 255.255.255.0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/1, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/1, changed state to up
+
+Router(config-if)#ex
+Router(config)#ip dhcp pool netC
+Router(dhcp-config)#network 192.168.10.0 255.255.255.0
+Router(dhcp-config)#default-route 192.168.10.1
+Router(dhcp-config)#ex
+Router(config)#int f0/0
+Router(config-if)#ip address 192.168.10.1 255.255.255.0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+Router(config-if)#ex
+Router(config)#ex
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+wr
+Building configuration...
+[OK]
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#int s0/2/1
+Router(config-if)#ip address 12.0.0.2 255.0.0.0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/1, changed state to up
+
+Router(config-if)#ex
+Router(config)#int 
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/1, changed state to up
+
+% Incomplete command.
+Router(config)#int s0/2/0
+Router(config-if)#ip add 10.0.0.2 255.0.0.0
+Router(config-if)#no shutdown
+
+Router(config-if)#
+%LINK-5-CHANGED: Interface Serial0/2/0, changed state to up
+
+Router(config-if)#ex
+Router(config)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/2/0, changed state to up
+
+Router(config)#ex
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#wr
+Building configuration...
+[OK]
+Router#
